@@ -1,0 +1,53 @@
+{
+  "name": "modern-2021-node-api",
+  "version": "1.0.0",
+  "description": "A modern, production-ready Node.js REST API built with Express.js featuring configuration management, input validation, and comprehensive testing",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "NODE_ENV=development set DEBUG=app,app:* & nodemon ./src/index.js",
+    "start": "NODE_ENV=production node ./src/index.js",
+    "test": "find ./test -name '*spec.js' | NODE_ENV=test xargs mocha --require ./test/helper/test_helper.js",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "rest-api",
+    "backend",
+    "api",
+    "joi-validation",
+    "mocha",
+    "chai",
+    "configuration-management",
+    "express-server",
+    "rest",
+    "api-demo",
+    "node-backend"
+  ],
+  "author": "Or Assayag <orassayag@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/orassayag/modern-2021-node-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/orassayag/modern-2021-node-api/issues"
+  },
+  "homepage": "https://github.com/orassayag/modern-2021-node-api#readme",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-chai-friendly": "^0.7.2",
+    "eslint-plugin-import": "^2.25.2",
+    "mocha": "^9.1.3",
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "body-parser": "^1.19.0",
+    "config": "^3.3.6",
+    "express": "^4.17.1"
+  }
+}
