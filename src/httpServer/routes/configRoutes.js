@@ -1,7 +1,4 @@
-const {
-  createConfig,
-  getConfig,
-} = require('../controllers/configController');
+const { createConfig, getConfig } = require('../controllers/configController');
 const configSchema = require('../middleware/configSchema');
 
 module.exports = async (app) => {

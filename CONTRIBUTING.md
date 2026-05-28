@@ -9,6 +9,7 @@ Everyone is welcome to contribute to this project. Contributing doesn't just mea
 ### Reporting Issues
 
 If you find a bug or have a feature request:
+
 1. Check if the issue already exists in the GitHub Issues
 2. If not, create a new issue with:
    - Clear title and description
@@ -32,12 +33,14 @@ If you find a bug or have a feature request:
 ### Code Style Guidelines
 
 This project uses:
+
 - **JavaScript (ES6+)** with Node.js
 - **ESLint** with Airbnb base configuration for code quality
 - **Express.js** for REST API
 - **Joi** for input validation
 
 Before submitting:
+
 ```bash
 # Run linting
 npm run lint
@@ -62,6 +65,7 @@ npm run dev
 ### Adding New Features
 
 When adding new features:
+
 1. Create routes in `src/httpServer/routes/`
 2. Add controllers in `src/httpServer/controllers/`
 3. Add validation schemas in `src/httpServer/middleware/`
@@ -87,6 +91,7 @@ When adding new features:
 5. Ensure tests are independent and can run in any order
 
 Example test structure:
+
 ```javascript
 describe('endpoint description', () => {
   it('should succeed when valid data provided', async () => {
@@ -103,9 +108,9 @@ describe('endpoint description', () => {
 
 Please feel free to contact me with any question, comment, pull-request, issue, or any other thing you have in mind.
 
-* Or Assayag <orassayag@gmail.com>
-* GitHub: https://github.com/orassayag
-* StackOverflow: https://stackoverflow.com/users/4442606/or-assayag?tab=profile
-* LinkedIn: https://linkedin.com/in/orassayag
+- Or Assayag <orassayag@gmail.com>
+- GitHub: https://github.com/orassayag
+- StackOverflow: https://stackoverflow.com/users/4442606/or-assayag?tab=profile
+- LinkedIn: https://linkedin.com/in/orassayag
 
 Thank you for contributing! 🙏

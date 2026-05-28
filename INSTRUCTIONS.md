@@ -1,12 +1,37 @@
-# Instructions
+# Setup and Usage Instructions
+
+## Table of Contents
+
+1. [Prerequisites](#prerequisites)
+2. [Initial Setup](#initial-setup)
+3. [Environment Management](#environment-management)
+4. [Available Commands](#available-commands)
+5. [API Endpoints](#api-endpoints)
+6. [Development](#development)
+7. [Troubleshooting](#troubleshooting)
+8. [Best Practices](#best-practices)
+9. [Support and Resources](#support-and-resources)
+10. [Last Updated](#last-updated)
 
 ## Setup Instructions
 
-1. Open the project in your IDE (VSCode recommended)
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+### System Requirements
+
+- **Node.js**: Version 12 or higher
+- **Package Manager**: npm
+- **Operating System**: macOS, Linux, or Windows
+- **Memory**: 1GB RAM minimum
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Initial Setup
+
+1. Open the project in your IDE
+2. Install dependencies: `npm install`
 3. Ensure you have Node.js v12+ installed
 
 ## Configuration
@@ -16,6 +41,7 @@ Configuration is managed using the [config](https://www.npmjs.com/package/config
 ### Environment Variables
 
 Create environment variables or edit config files:
+
 - `config/default.js` - Default configuration
 - `config/development.js` - Development overrides
 - `config/production.js` - Production overrides
@@ -35,37 +61,68 @@ Create environment variables or edit config files:
 }
 ```
 
+## Available Commands
+
+### Development Commands
+
+```bash
+# Start development server with hot-reload
+npm run dev
+
+# Check code style and quality
+npm run lint
+
+# Run all tests
+npm test
+```
+
+### Production Commands
+
+```bash
+# Start server in production mode
+npm start
+```
+
 ## Running Scripts
 
 ### Development Mode
+
 Runs the server with hot-reload using nodemon:
+
 ```bash
 npm run dev
 ```
 
 **Features:**
+
 - Automatic restart on file changes
 - Debug mode enabled
 - Runs on port 4001 by default
 
 ### Production Mode
+
 Runs the server in production mode:
+
 ```bash
 npm run start
 ```
 
 **Prerequisites:**
+
 - Set `NODE_ENV=production`
 - Configure production environment variables
 - Ensure all dependencies are installed
 
 ### Running Tests
+
 Executes the test suite:
+
 ```bash
 npm test
 ```
 
 **What it does:**
+
 - Runs all test files matching `*spec.js` pattern
 - Uses Mocha test framework with Chai assertions
 - Loads test helper with required configuration
@@ -73,15 +130,18 @@ npm test
 ## API Endpoints
 
 ### GET /api/config/
+
 Retrieves the current configuration.
 
 **Request:**
+
 ```bash
 curl -X GET http://localhost:4001/api/config/ \
   -H "Content-Type: application/json"
 ```
 
 **Response:**
+
 ```json
 {
   "a": "value",
@@ -90,12 +150,15 @@ curl -X GET http://localhost:4001/api/config/ \
 ```
 
 **Status Codes:**
+
 - `200 OK` - Success
 
 ### POST /veryhiddenapi/config/
+
 Creates or updates configuration (protected endpoint).
 
 **Request:**
+
 ```bash
 curl -X POST http://localhost:4001/veryhiddenapi/config/ \
   -H "Content-Type: application/json" \
@@ -106,6 +169,7 @@ curl -X POST http://localhost:4001/veryhiddenapi/config/ \
 ```
 
 **Request Body Schema:**
+
 ```javascript
 {
   a: Joi.string(),
@@ -114,12 +178,14 @@ curl -X POST http://localhost:4001/veryhiddenapi/config/ \
 ```
 
 **Response:**
+
 - `201 Created` - Configuration created successfully
 - `400 Bad Request` - Validation error
 
 ## File Structure
 
 ### Source Code (`src/`)
+
 ```
 src/
 ├── index.js                    # Application entry point
@@ -138,6 +204,7 @@ src/
 ```
 
 ### Configuration (`config/`)
+
 ```
 config/
 ├── default.js      # Default configuration
@@ -147,6 +214,7 @@ config/
 ```
 
 ### Tests (`test/`)
+
 ```
 test/
 ├── helper/
@@ -160,6 +228,7 @@ test/
 ### Adding New Endpoints
 
 1. **Create Route File** (`src/httpServer/routes/yourRoute.js`):
+
 ```javascript
 const { handler } = require('../controllers/yourController');
 const schema = require('../middleware/yourSchema');
@@ -171,6 +240,7 @@ module.exports = async (app) => {
 ```
 
 2. **Create Controller** (`src/httpServer/controllers/yourController.js`):
+
 ```javascript
 const handler = async (req, res) => {
   // Implementation
@@ -181,13 +251,14 @@ module.exports = { handler };
 ```
 
 3. **Add Validation Schema** (`src/httpServer/middleware/yourSchema.js`):
+
 ```javascript
 const Joi = require('@hapi/joi');
 const validate = require('./validate');
 
 const yourSchema = (req, res, next) => {
   const schema = Joi.object({
-    field: Joi.string().required()
+    field: Joi.string().required(),
   });
   validate(req, next, schema);
 };
@@ -196,6 +267,7 @@ module.exports = yourSchema;
 ```
 
 4. **Register Route** in `src/httpServer/routes/index.js`:
+
 ```javascript
 const yourRoutes = require('./yourRoutes');
 
@@ -206,14 +278,30 @@ module.exports = (app) => {
 
 5. **Write Tests** in `test/controllers/your.spec.js`
 
+### Extending the Application
+
+#### Adding New Routes
+
+1. Create a new route file in `src/httpServer/routes/`
+2. Define your endpoints and link them to controllers
+3. Register the new route in `src/httpServer/routes/index.js`
+
+#### Adding New Services
+
+1. Create a new service file in `src/services/`
+2. Implement your business logic
+3. Import and use the service in your controllers
+
 ### Linting
 
 The project uses ESLint with Airbnb configuration:
+
 ```bash
 npm run lint
 ```
 
 To fix auto-fixable issues:
+
 ```bash
 npx eslint --fix .
 ```
@@ -221,6 +309,7 @@ npx eslint --fix .
 ## Debugging
 
 Enable debug output:
+
 ```bash
 DEBUG=app,app:* npm run dev
 ```
@@ -228,23 +317,44 @@ DEBUG=app,app:* npm run dev
 ## Troubleshooting
 
 ### Port Already in Use
+
 Change the port in environment variables:
+
 ```bash
 PORT=4002 npm run dev
 ```
 
 ### Module Not Found
+
 Reinstall dependencies:
+
 ```bash
 rm -rf node_modules package-lock.json
 npm install
 ```
 
 ### Tests Failing
+
 Ensure test environment is set:
+
 ```bash
 NODE_ENV=test npm test
 ```
+
+## Best Practices
+
+### Development
+
+1. **Use Hot-Reload**: Always use `npm run dev` during development for automatic restarts.
+2. **Validation First**: Ensure every POST/PUT request has a corresponding Joi schema.
+3. **Environment Overrides**: Use `config/*.js` files instead of hardcoding values.
+4. **Error Handling**: Use the provided `validate` middleware to handle validation errors consistently.
+
+### Testing
+
+1. **Isolation**: Tests should not depend on external state; use mocks like the S3 service mock.
+2. **Naming**: Use `.spec.js` suffix for all test files.
+3. **Helpers**: Use `test_helper.js` for common setup and assertions.
 
 ## Notes
 
@@ -254,10 +364,30 @@ NODE_ENV=test npm test
 - Configuration is environment-specific using the config module
 - S3 service is currently mocked (placeholder implementation)
 
+## Support and Resources
+
+### Documentation
+
+- [README.md](README.md) - Project overview and architecture
+- [API Endpoints](#api-endpoints) - Detailed endpoint documentation
+
+### External Resources
+
+- [Express.js Documentation](https://expressjs.com/)
+- [Joi Validation](https://joi.dev/)
+- [Node-config](https://github.com/node-config/node-config)
+
 ## Author
 
-* **Or Assayag** - *Initial work* - [orassayag](https://github.com/orassayag)
-* Or Assayag <orassayag@gmail.com>
-* GitHub: https://github.com/orassayag
-* StackOverflow: https://stackoverflow.com/users/4442606/or-assayag?tab=profile
-* LinkedIn: https://linkedin.com/in/orassayag
+- **Or Assayag** - _Initial work_ - [orassayag](https://github.com/orassayag)
+- Or Assayag <orassayag@gmail.com>
+- GitHub: https://github.com/orassayag
+- StackOverflow: https://stackoverflow.com/users/4442606/or-assayag?tab=profile
+- LinkedIn: https://linkedin.com/in/orassayag
+
+---
+
+## Last Updated
+
+**May 2026**
+**Version**: 1.0.0
